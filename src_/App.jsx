@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef, useReducer } from "react";
+import { createClient } from "@supabase/supabase-js";
 
 /* ═══════════════════════════════════════════════════════════════
    RESPONSIVE HOOK
@@ -3053,8 +3054,7 @@ export default function App() {
           // In Vite build: supabase-js is installed; load it.
           // In HTML mode: user must add CDN script before this runs.
           try{
-            const mod=await import("https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm");
-            window.__supabase=mod.createClient(url,akey);
+            window.__supabase=createClient(url,akey);
           }catch(e){
             console.warn("Could not load Supabase JS:",e.message);
             setBooting(false);
