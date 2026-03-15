@@ -3035,9 +3035,8 @@ export default function App() {
   // Falls back to window.__SUPABASE_URL__ / window.__SUPABASE_KEY__
   // for HTML-only usage (open adforge.html directly in browser).
   useEffect(()=>{
-    const env  = (()=>{try{return import.meta?.env||{};}catch{return {};}})();
-    const url  = env.VITE_SUPABASE_URL  || window.__SUPABASE_URL__  || "";
-    const akey = env.VITE_SUPABASE_ANON_KEY || window.__SUPABASE_KEY__ || "";
+    const url  = import.meta.env.VITE_SUPABASE_URL  || window.__SUPABASE_URL__  || "";
+    const akey = import.meta.env.VITE_SUPABASE_ANON_KEY || window.__SUPABASE_KEY__ || "";
     if(!url||!akey){
       console.warn("AdForge: Supabase not configured. Set VITE_SUPABASE_URL + VITE_SUPABASE_ANON_KEY.");
       setBooting(false);
