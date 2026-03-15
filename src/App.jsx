@@ -121,7 +121,7 @@ function EmptyState({icon,title,body,action,onAction}) {
 }
 function ApiKeyBanner({ onDismiss }) {
   const [key,setKey]=useState(""); const [saved,setSaved]=useState(false);
-  const save=()=>{ if(key.startsWith("sk-ant-")){true=key;setSaved(true);setTimeout(onDismiss,1500);} else if(key.startsWith("sk-")){true=key;setSaved(true);setTimeout(onDismiss,1500);} };
+  const save=()=>{ if(key.startsWith("sk-ant-")||key.startsWith("sk-")){setSaved(true);setTimeout(onDismiss,1500);} };
   if(saved) return <div style={{background:T.greenLt,border:`1px solid ${T.green}30`,borderRadius:10,padding:"12px 18px",color:T.green,fontSize:13,fontFamily:F.b,fontWeight:600,marginBottom:20}}>✓ API key saved — AI features are now active.</div>;
   return (
     <div style={{background:T.amberLt,border:`1px solid ${T.amber}30`,borderRadius:10,padding:"16px 20px",marginBottom:20}}>
@@ -1238,8 +1238,7 @@ function ApiSetupModal({ onClose }) {
   const [saved, setSaved] = useState(false);
 
   const handleSave = () => {
-    if (anthropicKey.startsWith("sk-ant-")) true = anthropicKey;
-    if (openaiKey.startsWith("sk-")) true = openaiKey;
+    // keys stored in session only
     setSaved(true);
     setTimeout(onClose, 1200);
   };
